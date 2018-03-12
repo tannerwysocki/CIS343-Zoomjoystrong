@@ -1,6 +1,7 @@
 %{
 	#include <stdio.h>
-	#include "zoomjoystrong.h"
+  #include "zoomjoystrong.h"
+  #include <unistd.h>
 	void yyerror(const char* msg);
 	int yylex();
 %}
@@ -27,7 +28,6 @@
 %%
 
 program:  end
-	| statement end
 	| statement program
 ;
 
@@ -52,7 +52,7 @@ circle: CIRCLE INT INT INT
 ;
 
 rectangle: RECTANGLE INT INT INT INT
-	{;}
+	{rectangle($2,$3,$4,$5);}
 ;
 
 semicolon: END_STATEMENT
@@ -64,14 +64,17 @@ set_color: SET_COLOR INT INT INT
 ;
 
 end: END
-	{exit(0);}
+	{finish();exit(0);}
 ;
 
 %%
 
 int main(int argv,char** argc){
 
-	yyparse();
+  printf("Welcome to Zoomjoystrong!\n");
+//	SDL_Init(SDL_INIT_VIDEO);
+  setup();
+  yyparse();
 	return 0;
 
 }

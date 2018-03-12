@@ -74,7 +74,7 @@ void rectangle(int x, int y, int w, int h){
 }
 
 void finish(){
-	SDL_Delay(5000);
+  SDL_Delay(5000);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
