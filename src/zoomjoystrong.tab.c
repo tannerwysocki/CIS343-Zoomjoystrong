@@ -430,7 +430,7 @@ static const yytype_int8 yyrhs[] =
 static const yytype_uint8 yyrline[] =
 {
        0,    30,    30,    31,    34,    35,    36,    37,    38,    39,
-      42,    46,    50,    54,    58,    62,    66
+      42,    50,    59,    68,    77,    81,    90
 };
 #endif
 
@@ -1348,42 +1348,66 @@ yyreduce:
     {
         case 10:
 #line 43 "zoomjoystrong.y"
-    {point((yyvsp[(2) - (3)].i),(yyvsp[(3) - (3)].i));;}
+    {if((yyvsp[(2) - (3)].i) > 1024 || (yyvsp[(2) - (3)].i) < 0 || (yyvsp[(3) - (3)].i) > 768 || (yyvsp[(3) - (3)].i) < 0)
+    printf("SYNTAX ERROR");
+   else
+    point((yyvsp[(2) - (3)].i),(yyvsp[(3) - (3)].i))
+  ;;}
     break;
 
   case 11:
-#line 47 "zoomjoystrong.y"
-    {line((yyvsp[(2) - (5)].i),(yyvsp[(3) - (5)].i),(yyvsp[(4) - (5)].i),(yyvsp[(5) - (5)].i));;}
+#line 51 "zoomjoystrong.y"
+    {if((yyvsp[(2) - (5)].i) > 1024 || (yyvsp[(2) - (5)].i) < 0 || (yyvsp[(3) - (5)].i) > 768 || (yyvsp[(3) - (5)].i) < 0 || (yyvsp[(4) - (5)].i) > 1024 || (yyvsp[(4) - (5)].i) < 0 ||
+      (yyvsp[(5) - (5)].i) > 768 || (yyvsp[(5) - (5)].i) < 0)
+      printf("SYNTAX ERROR\n");
+   else
+    line((yyvsp[(2) - (5)].i),(yyvsp[(3) - (5)].i),(yyvsp[(4) - (5)].i),(yyvsp[(5) - (5)].i))
+  ;;}
     break;
 
   case 12:
-#line 51 "zoomjoystrong.y"
-    {circle((yyvsp[(2) - (4)].i),(yyvsp[(3) - (4)].i),(yyvsp[(4) - (4)].i));;}
+#line 60 "zoomjoystrong.y"
+    {if((yyvsp[(2) - (4)].i) > 1024 || (yyvsp[(2) - (4)].i) < 0 || (yyvsp[(3) - (4)].i) > 768 || (yyvsp[(3) - (4)].i) < 0 || (yyvsp[(4) - (4)].i) > 1024 || (yyvsp[(4) - (4)].i) > 768 ||
+    (yyvsp[(4) - (4)].i) < 0)
+    printf("SYNTAX ERROR\n");
+  else
+    circle((yyvsp[(2) - (4)].i),(yyvsp[(3) - (4)].i),(yyvsp[(4) - (4)].i))
+  ;;}
     break;
 
   case 13:
-#line 55 "zoomjoystrong.y"
-    {rectangle((yyvsp[(2) - (5)].i),(yyvsp[(3) - (5)].i),(yyvsp[(4) - (5)].i),(yyvsp[(5) - (5)].i));;}
+#line 69 "zoomjoystrong.y"
+    {if((yyvsp[(2) - (5)].i) > 1024 || (yyvsp[(2) - (5)].i) < 0 || (yyvsp[(3) - (5)].i) > 768 || (yyvsp[(3) - (5)].i) < 0 || (yyvsp[(4) - (5)].i) > 1024 || (yyvsp[(4) - (5)].i) < 0 ||
+    (yyvsp[(5) - (5)].i) > 768 || (yyvsp[(5) - (5)].i) < 0)
+    printf("SYNTAX ERROR\n");
+   else
+    rectangle((yyvsp[(2) - (5)].i),(yyvsp[(3) - (5)].i),(yyvsp[(4) - (5)].i),(yyvsp[(5) - (5)].i))
+  ;;}
     break;
 
   case 14:
-#line 59 "zoomjoystrong.y"
+#line 78 "zoomjoystrong.y"
     {;;}
     break;
 
   case 15:
-#line 63 "zoomjoystrong.y"
-    {set_color((yyvsp[(2) - (4)].i),(yyvsp[(3) - (4)].i),(yyvsp[(4) - (4)].i));;}
+#line 82 "zoomjoystrong.y"
+    {if((yyvsp[(2) - (4)].i) < 0 || (yyvsp[(2) - (4)].i) > 255 || (yyvsp[(3) - (4)].i) < 0 || (yyvsp[(3) - (4)].i) > 255 || (yyvsp[(4) - (4)].i) < 0 || (yyvsp[(4) - (4)].i) > 255){
+    printf("SYNTAX ERROR\n");
+  }
+  else
+    set_color((yyvsp[(2) - (4)].i),(yyvsp[(3) - (4)].i),(yyvsp[(4) - (4)].i));
+  ;}
     break;
 
   case 16:
-#line 67 "zoomjoystrong.y"
+#line 91 "zoomjoystrong.y"
     {finish();exit(0);;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1387 "zoomjoystrong.tab.c"
+#line 1411 "zoomjoystrong.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1597,13 +1621,12 @@ yyreturn:
 }
 
 
-#line 70 "zoomjoystrong.y"
+#line 94 "zoomjoystrong.y"
 
 
 int main(int argv,char** argc){
 
   printf("Welcome to Zoomjoystrong!\n");
-//	SDL_Init(SDL_INIT_VIDEO);
   setup();
   yyparse();
 	return 0;
